@@ -3,6 +3,7 @@
 Repositório pessoal de estudos e materiais de aula.
 
 - [Aulas de probabilidade](Aulas%20de%20probabilidade/): materiais de probabilidade.
+- [Axioma no site acadêmico](https://theoambrosio.github.io/axioma.html): apresentação do projeto e leitura das notas e listas.
 - [README original do Delta](docs/DELTA_README.md): referência para escrever arquivos `.dlt`.
 - [Orientações para assistentes de IA](AGENTS.md).
 
