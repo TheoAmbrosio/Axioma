@@ -14,4 +14,4 @@ A licença do projeto original acompanha a cópia em `docs/DELTA_LICENSE`.
 
 Documentação oficial: https://rbribeiro.github.io/delta/
 
-Este repositório foi iniciado localmente; ainda não tem um remoto no GitHub.
+Repositório no GitHub: https://github.com/TheoAmbrosio/Axioma.

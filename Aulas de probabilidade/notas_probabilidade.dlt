@@ -1,0 +1,732 @@
+<document lang="pt-BR" type="book" theme-accent="blue">
+<title>Probabilidade</title>
+<meta>
+  <meta-item key="Autor">Theo</meta-item>
+  <meta-item key="Referência"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf">Casella e Berger, Statistical Inference, 2ª edição, capítulo 1</link></meta-item>
+</meta>
+<intro>Conjuntos, probabilidades, variáveis aleatórias e distribuições.</intro>
+As páginas indicadas junto aos resultados são as páginas impressas do livro.
+Os links abrem a página correspondente no PDF. A redação e as demonstrações são
+adaptadas para estas notas; exemplos próprios não recebem a numeração do livro.
+<toc depth="2"/>
+<floating><title>Navegação</title><toc depth="2"/></floating>
+<chapter id="teoria-probabilidade" num="1"><title>Teoria da probabilidade</title>
+
+
+<section id="conjuntos" num="1.1"><title>Espaço amostral, eventos e conjuntos</title>
+
+      <definition id="def:espaco-amostral" num="1.1.1">
+        <title>Espaço amostral</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=28">Casella e Berger, p. 1</link></meta-item></meta>
+
+        O espaço amostral $S$ é o conjunto de todos os resultados possíveis de um experimento.
+      </definition>
+      <example id="ex:moeda" numbered="false">
+        <title>Lançamento de uma moeda</title>
+        Jogar uma moeda e observar se cai cara ou coroa:
+        $$S=\{\text{cara},\text{coroa}\}.$$
+      </example>
+      <example id="ex:eleicao" numbered="false">
+<title>Eleição</title>
+Se o experimento consiste em observar quem vence uma eleição com três candidatos,
+podemos representar seus resultados por $S=\{c_1,c_2,c_3\}$.
+</example>
+      <definition id="def:evento" num="1.1.2">
+<title>Evento</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=29">Casella e Berger, p. 2</link></meta-item></meta>
+
+Um evento é um subconjunto do espaço amostral. O evento $A$ ocorre quando
+o resultado observado pertence a $A$. Fixada uma $\sigma$-álgebra $\mathcal B$,
+consideramos como eventos mensuráveis os conjuntos de $\mathcal B$.
+</definition>
+<example id="ex:evento-eleicao" numbered="false">
+<title>Evento em uma eleição</title>
+Considere uma eleição hipotética com candidatos $c_1,c_2,c_3$, em que há um único vencedor.
+O evento “vence $c_1$ ou $c_2$” é o conjunto $A=\{c_1,c_2\}$.
+Já “$c_1$ e $c_2$ vencem simultaneamente” é impossível nesse modelo e corresponde a $\varnothing$.
+</example>
+
+      <subsection id="operacoes-conjuntos">
+        <title>Operações e relações entre conjuntos</title>
+        <equations numbered="false">
+          A\subseteq B &\iff \bigl(x\in A\Rightarrow x\in B\bigr),\\
+          A=B &\iff A\subseteq B\text{ e }B\subseteq A,\\
+          A\cup B &=\{x:x\in A\text{ ou }x\in B\},\\
+          A\cap B &=\{x:x\in A\text{ e }x\in B\},\\
+          A^c &=\{x\in S:x\notin A\}.
+        </equations>
+        O complemento é sempre tomado em relação ao espaço amostral $S$.
+
+<theorem id="thm:leis-conjuntos" num="1.1.4">
+<title>Leis das operações com conjuntos</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=30">Casella e Berger, pp. 3–4</link></meta-item></meta>
+        <b>Comutatividade:</b>
+        $$A\cup B=B\cup A,\qquad A\cap B=B\cap A.$$
+        <b>Associatividade:</b>
+        $$A\cup(B\cup C)=(A\cup B)\cup C,$$
+        $$A\cap(B\cap C)=(A\cap B)\cap C.$$
+        <b>Distributividade:</b>
+        $$A\cap(B\cup C)=(A\cap B)\cup(A\cap C),$$
+        $$A\cup(B\cap C)=(A\cup B)\cap(A\cup C).$$
+        <b>Leis de De Morgan:</b>
+        $$(A\cup B)^c=A^c\cap B^c,\qquad (A\cap B)^c=A^c\cup B^c.$$
+</theorem>
+<proof of="thm:leis-conjuntos">
+Como exemplo, para provar a distributividade, verificamos a equivalência
+$$x\in A\cap(B\cup C)
+\iff x\in A\text{ e }(x\in B\text{ ou }x\in C)
+\iff x\in(A\cap B)\cup(A\cap C).$$
+As outras identidades são verificadas pelo mesmo método de comparar a pertinência de cada elemento.
+</proof>
+      </subsection>
+
+      <subsection id="disjuncao-particoes">
+        <title>Eventos disjuntos e partições</title>
+        <definition id="def:disjuntos" num="1.1.5">
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=32">Casella e Berger, p. 5</link></meta-item></meta>
+
+          Dois eventos $A$ e $B$ são <b>disjuntos</b>, ou mutuamente exclusivos, se
+          $$A\cap B=\varnothing.$$
+          Uma coleção $A_1,A_2,\ldots$ é <b>dois a dois disjunta</b> se
+          $$A_i\cap A_j=\varnothing\qquad\text{para todo }i\ne j.$$
+        </definition>
+        <example id="ex:pares-impares" numbered="false">
+          $$A=\{1,3,5,7,\ldots\},\qquad B=\{2,4,6,\ldots\}.$$
+          Então $A\cap B=\varnothing$.
+        </example>
+        <definition id="def:particao" num="1.1.6">
+          <title>Partição</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=32">Casella e Berger, p. 5</link></meta-item></meta>
+
+          Se $A_1,A_2,\ldots$ são dois a dois disjuntos e
+          $$\bigcup_{i=1}^{\infty}A_i=S,$$
+          a coleção forma uma partição de $S$ (usualmente consideram-se apenas partes não vazias).
+        </definition>
+<example id="ex:intervalos-particao" numbered="false">
+<title>Uma partição de um intervalo</title>
+Os conjuntos $A_i=[i,i+1)$, para $i=0,1,2,\ldots$, são dois a dois disjuntos e
+$$\bigcup_{i=0}^{\infty}A_i=[0,\infty).$$
+O extremo direito aberto impede que inteiros consecutivos pertençam a duas partes.
+<em>Casella e Berger, p. 5.</em>
+</example>
+      </subsection></section>
+
+<section id="fundamentos" num="1.2"><title>Fundamentos da probabilidade</title><subsection id="sigma-algebra">
+<title>Sigma-álgebra</title>
+      <definition id="def:sigma-algebra" num="1.2.1">
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=33">Casella e Berger, p. 6</link></meta-item></meta>
+
+        Uma coleção $\mathcal B$ de subconjuntos de $S$ é uma <b>$\sigma$-álgebra</b> se:
+        <list marker="number">
+          <item>$\varnothing\in\mathcal B$.</item>
+          <item>Se $A\in\mathcal B$, então $A^c\in\mathcal B$.</item>
+          <item>Se $A_1,A_2,\ldots\in\mathcal B$, então
+            $$\bigcup_{i=1}^{\infty}A_i\in\mathcal B.$$</item>
+        </list>
+        Isto é, a coleção contém o vazio e é fechada por complementos e uniões contáveis.
+      </definition>
+Como $S=\varnothing^c$, temos $S\in\mathcal B$. Pelas leis de De Morgan,
+a coleção também é fechada por interseções contáveis:
+$$\bigcap_{i=1}^{\infty}A_i=
+\left(\bigcup_{i=1}^{\infty}A_i^c\right)^c\in\mathcal B.$$
+      <example id="ex:conjunto-potencia" num="1.2.2">
+        <title>Todos os subconjuntos</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=33">Casella e Berger, p. 6</link></meta-item></meta>
+
+        Para $S$ finito ou contável, podemos usar
+        $$\mathcal B=\mathcal P(S)=\{A:A\subseteq S\}.$$
+        Se $S$ tem $n$ elementos, $\mathcal B$ tem $2^n$ elementos. Por exemplo,
+        para $S=\{1,2,3\}$,
+        $$\mathcal B=\{\varnothing,\{1\},\{2\},\{3\},
+          \{1,2\},\{1,3\},\{2,3\},\{1,2,3\}\}.$$
+      </example>
+      <example id="ex:intervalos-borel" num="1.2.3">
+<title>Conjuntos de Borel na reta</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=33">Casella e Berger, p. 6</link></meta-item></meta>
+
+Em $S=\mathbb R$, usamos a $\sigma$-álgebra de Borel $\mathcal B(\mathbb R)$,
+gerada pelos abertos da reta. Ela contém intervalos das formas
+$$[a,b],\quad[a,b),\quad(a,b],\quad(a,b),$$
+e também uniões e interseções contáveis desses conjuntos.
+</example>
+</subsection>
+<subsection id="axiomas-probabilidade">
+<title>Axiomas de Kolmogorov</title>
+      <definition id="def:probabilidade" num="1.2.4">
+        <title>Função de probabilidade</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=34">Casella e Berger, p. 7</link></meta-item></meta>
+
+        Dado um espaço amostral $S$ associado a uma $\sigma$-álgebra $\mathcal B$,
+        uma função de probabilidade $P:\mathcal B\to\mathbb R$ satisfaz:
+        <list marker="number">
+          <item><b>Não negatividade:</b> $P(A)\ge0$ para todo $A\in\mathcal B$.</item>
+          <item><b>Normalização:</b> $P(S)=1$.</item>
+          <item><b>Aditividade contável:</b> se $A_1,A_2,\ldots$ são eventos dois a dois disjuntos,
+            $$P\left(\bigcup_{i=1}^{\infty}A_i\right)=\sum_{i=1}^{\infty}P(A_i).$$</item>
+        </list>
+      </definition>
+      <example id="ex:moeda-axiomas" num="1.2.5">
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=34">Casella e Berger, p. 7</link></meta-item></meta>
+
+        Para uma moeda equilibrada, $P(\{\text{cara}\})=P(\{\text{coroa}\})$ e
+        $$P(S)=P(\{\text{cara}\}\cup\{\text{coroa}\})
+             =P(\{\text{cara}\})+P(\{\text{coroa}\})=1.$$
+        A interseção dos dois eventos é vazia.
+      </example>
+
+      <theorem id="thm:prob-contavel" num="1.2.6">
+<title>Construção de uma probabilidade em um espaço finito</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=34">Casella e Berger, pp. 7–8</link></meta-item></meta>
+
+Seja $S=\{s_1,\ldots,s_n\}$ e seja $\mathcal B$ uma $\sigma$-álgebra de subconjuntos de $S$.
+Escolha $p_1,\ldots,p_n\ge0$, com $\sum_{i=1}^n p_i=1$, e defina
+$$P(A)=\sum_{i:s_i\in A}p_i,\qquad A\in\mathcal B.$$
+Então $P$ satisfaz os axiomas de probabilidade.
+</theorem>
+      <proof of="thm:prob-contavel">
+        
+        Como $p_i\ge0$, temos $P(A)=\sum_{i:s_i\in A}p_i\ge0$.
+        Além disso,
+        $$P(S)=\sum_{i:s_i\in S}p_i=\sum_i p_i=1.$$
+        Se os eventos $A_j$ são dois a dois disjuntos, cada ponto de sua união
+        aparece em exatamente um deles. Portanto,
+        $$P\left(\bigcup_j A_j\right)
+           =\sum_{i:s_i\in\bigcup_j A_j}p_i
+           =\sum_j\sum_{i:s_i\in A_j}p_i
+           =\sum_j P(A_j).$$
+        
+      </proof>
+<box type="note"><title>Extensão contável</title>
+A construção também funciona para $S=\{s_1,s_2,\ldots\}$, desde que
+$p_i\ge0$ e $\sum_i p_i=1$. O reagrupamento das somas é válido por não negatividade.
+Se os conjuntos unitários são mensuráveis, $P(\{s_i\})=p_i$.
+</box>
+      <theorem id="thm:propriedades-basicas" num="1.2.8">
+        <title>Propriedades básicas</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=37">Casella e Berger, p. 10</link></meta-item></meta>
+
+        Seja $P$ uma função de probabilidade e $A\in\mathcal B$. Então:
+        <list marker="a">
+          <item>$P(\varnothing)=0$.</item>
+          <item>$P(A)\le1$.</item>
+          <item>$P(A^c)=1-P(A)$.</item>
+        </list>
+      </theorem>
+      <proof of="thm:propriedades-basicas">
+        Começando por (c), como $A$ e $A^c$ são disjuntos,
+        $$1=P(S)=P(A\cup A^c)=P(A)+P(A^c),$$
+        de onde $P(A^c)=1-P(A)$.
+        Para (a), tome $A=S$: $P(\varnothing)=1-P(S)=0$.
+        Para (b), a não negatividade de $P(A^c)$ dá
+        $$1-P(A)\ge0\quad\Rightarrow\quad P(A)\le1.$$
+      </proof>
+</subsection>
+<subsection id="propriedades-teoremas">
+<title>Propriedades e teoremas</title>
+      <theorem id="thm:operacoes-probabilidade" num="1.2.9">
+        <title>Diferença, união e monotonicidade</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=37">Casella e Berger, pp. 10–11</link></meta-item></meta>
+
+        Se $A,B\in\mathcal B$, então:
+        <list marker="a">
+          <item>$P(B\cap A^c)=P(B)-P(A\cap B)$.</item>
+          <item>$P(A\cup B)=P(A)+P(B)-P(A\cap B)$.</item>
+          <item>Se $A\subseteq B$, então $P(A)\le P(B)$.</item>
+        </list>
+      </theorem>
+      <proof of="thm:operacoes-probabilidade">
+        <b>(a)</b> A união $B=(B\cap A)\cup(B\cap A^c)$ é disjunta. Logo,
+        $$P(B)=P(B\cap A)+P(B\cap A^c),$$
+        o que dá a identidade.
+
+        <b>(b)</b> Escreva $A\cup B=A\cup(B\setminus A)$, uma união disjunta.
+        Pelo item (a),
+        $$P(A\cup B)=P(A)+P(B\setminus A)=P(A)+P(B)-P(A\cap B).$$
+
+        <b>(c)</b> Se $A\subseteq B$, então $A\cap B=A$ e $A\cup B=B$.
+        Usando a decomposição disjunta $B=A\cup(B\setminus A)$,
+        $$P(B)=P(A)+P(B\setminus A)\ge P(A).$$
+        
+      </proof>
+      <example id="ex:limite-intersecao" num="1.2.10">
+        <title>Limite inferior para uma interseção</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=38">Casella e Berger, p. 11</link></meta-item></meta>
+
+        $$P(A\cap B)=P(A)+P(B)-P(A\cup B)\ge P(A)+P(B)-1.$$
+        Assim, se $P(A)=P(B)=0{,}95$, então
+        $$P(A\cap B)\ge0{,}95+0{,}95-1=0{,}90.$$
+      </example>
+
+      <theorem id="thm:total-boole" num="1.2.11">
+        <title>Partições e desigualdade de Boole</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=38">Casella e Berger, pp. 11–12</link></meta-item></meta>
+
+        <list marker="a">
+          <item>Para qualquer partição mensurável $C_1,C_2,\ldots$ de $S$,
+            $$P(A)=\sum_{i=1}^{\infty}P(A\cap C_i).$$</item>
+          <item>Para quaisquer eventos $A_1,A_2,\ldots$,
+            $$P\left(\bigcup_{i=1}^{\infty}A_i\right)
+              \le\sum_{i=1}^{\infty}P(A_i).$$</item>
+        </list>
+      </theorem>
+      <figure src="figuras/particao.svg" numbered="false" alt="Partição de S em nove regiões, com o evento A sobreposto">
+        <caption>Uma partição de $S$: as regiões $C_i$ são disjuntas e o evento $A$ é a união dos pedaços $A\cap C_i$. As fronteiras devem ser atribuídas a apenas uma das partes. Ilustração própria do Teorema 1.2.11, p. 11.</caption>
+      </figure>
+      <proof of="thm:total-boole">
+        <b>(a)</b> Os conjuntos $C_i$ são dois a dois disjuntos e $S=\bigcup_i C_i$.
+        Logo,
+        $$A=A\cap S=A\cap\left(\bigcup_{i=1}^{\infty}C_i\right)
+           =\bigcup_{i=1}^{\infty}(A\cap C_i).$$
+        A última união é disjunta, portanto a aditividade contável dá o resultado.
+
+        <b>(b)</b> Vamos construir conjuntos disjuntos com a mesma união.
+        Defina
+        $$A_1^*=A_1,\qquad
+          A_n^*=A_n\setminus\left(\bigcup_{j=1}^{n-1}A_j\right),\quad n\ge2.$$
+        Então os $A_i^*$ são dois a dois disjuntos e
+        $$\bigcup_{i=1}^{\infty}A_i^*=\bigcup_{i=1}^{\infty}A_i.$$
+        Além disso,
+        $$A_n^*=A_n\cap\left(\bigcup_{j=1}^{n-1}A_j\right)^c\subseteq A_n.$$
+        Pela monotonicidade, $P(A_n^*)\le P(A_n)$. Assim,
+        $$P\left(\bigcup_{i=1}^{\infty}A_i\right)
+          =\sum_{i=1}^{\infty}P(A_i^*)
+          \le\sum_{i=1}^{\infty}P(A_i).$$
+      </proof>
+</subsection></section>
+
+<section id="condicional-independencia" num="1.3"><title>Probabilidade condicional e independência</title>
+      <example id="ex:quatro-ases-enunciado" num="1.3.1">
+<title>Quatro ases</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=47">Casella e Berger, p. 20</link></meta-item></meta>
+
+Em quatro retiradas de um baralho bem embaralhado, sem reposição,
+há $\binom{52}{4}$ mãos possíveis e apenas uma contém os quatro ases. Assim,
+$$P(\text{quatro ases})=\binom{52}{4}^{-1}=\frac{1}{270725}.$$
+Também podemos calcular pela ordem das retiradas:
+$$\frac4{52}\cdot\frac3{51}\cdot\frac2{50}\cdot\frac1{49}
+=\frac{1}{270725}.$$
+</example>
+      <definition id="def:condicional" num="1.3.2">
+        <title>Probabilidade condicional</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=47">Casella e Berger, p. 20</link></meta-item></meta>
+
+        Sejam $A,B\in\mathcal B$, com $P(B)>0$. A probabilidade de $A$ dado $B$ é
+        $$P(A\mid B)=\frac{P(A\cap B)}{P(B)}.$$
+      </definition>
+O condicionamento restringe a atenção ao evento $B$ e renormaliza as probabilidades:
+$$P(B\mid B)=1,\qquad P(A\mid S)=P(A).$$
+Se $A$ e $B$ são disjuntos e $P(B)>0$, então $P(A\mid B)=0$.
+      <example id="ex:quatro-ases-calculo" num="1.3.3">
+        <title>Continuação: quatro ases dadas as primeiras cartas</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=47">Casella e Berger, pp. 20–21</link></meta-item></meta>
+
+        Considere um baralho comum de 52 cartas,
+        com quatro ases, e retiradas uniformes sem reposição.
+        Seja $A$ o evento de as quatro primeiras cartas serem ases e seja $B_k$
+        o evento de as primeiras $k$ cartas serem ases, com $0\le k\le4$.
+        Como $A\subseteq B_k$,
+        $$P(A\mid B_k)=\frac{P(A\cap B_k)}{P(B_k)}=\frac{P(A)}{P(B_k)}.$$
+        Temos
+        $$P(A)=\binom{52}{4}^{-1},\qquad
+          P(B_k)=\frac{\binom{4}{k}}{\binom{52}{k}}.$$
+        Portanto,
+        $$P(A\mid B_k)
+          =\frac{\binom{52}{4}^{-1}}{\binom{4}{k}/\binom{52}{k}}
+          =\frac{(4-k)!\,48!}{(52-k)!}
+          =\binom{52-k}{4-k}^{-1}.$$
+        
+      </example>
+<example id="ex:tres-prisioneiros" num="1.3.4">
+<title>Três prisioneiros e a informação anunciada</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=48">Casella e Berger, pp. 21–22</link></meta-item></meta>
+
+Sejam $A,B,C$ os eventos de cada um de três prisioneiros receber um indulto,
+com probabilidades iniciais iguais a $1/3$. O guarda informa ao primeiro prisioneiro
+que o segundo será executado; denote essa mensagem por $M$.
+Suponha que, quando pode escolher entre dois nomes, o guarda escolhe ao acaso.
+Então
+$$P(M\mid A)=\frac12,\qquad P(M\mid B)=0,\qquad P(M\mid C)=1.$$
+Logo $P(M)=\frac12\cdot\frac13+0\cdot\frac13+1\cdot\frac13=\frac12$ e
+$$P(A\mid M)=\frac{(1/2)(1/3)}{1/2}=\frac13,\qquad
+P(C\mid M)=\frac{1\cdot(1/3)}{1/2}=\frac23.$$
+A mensagem do guarda não equivale simplesmente a escolher um vencedor entre dois nomes.
+</example>
+
+      <theorem id="thm:bayes" num="1.3.5">
+        <title>Regra de Bayes</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=50">Casella e Berger, p. 23</link></meta-item></meta>
+
+        Seja $A_1,A_2,\ldots$ uma partição mensurável de $S$, com $P(A_i)>0$,
+        e seja $B$ um evento com $P(B)>0$. Então
+        $$P(A_i\mid B)=
+          \frac{P(B\mid A_i)P(A_i)}
+          {\displaystyle\sum_{j=1}^{\infty}P(B\mid A_j)P(A_j)}.$$
+        Os termos de probabilidade nula podem ser omitidos da partição.
+      </theorem>
+<proof of="thm:bayes">
+Os eventos $B\cap A_j$ são disjuntos e sua união é $B$. Portanto,
+$$P(B)=\sum_j P(B\cap A_j)=\sum_j P(B\mid A_j)P(A_j).$$
+Substituindo essa identidade e $P(A_i\cap B)=P(B\mid A_i)P(A_i)$
+na definição de $P(A_i\mid B)$, obtemos a fórmula.
+</proof>
+<example id="ex:codificacao" num="1.3.6">
+<title>Codificação com erro de transmissão</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=50">Casella e Berger, p. 23</link></meta-item></meta>
+
+Um sinal pode ser ponto ou traço. Use as probabilidades
+$$P(\text{ponto enviado})=\frac37,\qquad P(\text{traço enviado})=\frac47,$$
+e probabilidade $1/8$ de trocar um símbolo pelo outro durante a transmissão.
+Se $D$ indica ponto enviado e $R$ indica ponto recebido,
+$$P(R)=P(R\mid D)P(D)+P(R\mid D^c)P(D^c)
+=\frac78\cdot\frac37+\frac18\cdot\frac47=\frac{25}{56}.$$
+Assim,
+$$P(D\mid R)=\frac{(7/8)(3/7)}{25/56}=\frac{21}{25}.$$
+</example>
+
+      <definition id="def:independencia" num="1.3.7">
+        <title>Independência de dois eventos</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=51">Casella e Berger, p. 24</link></meta-item></meta>
+
+        Dois eventos $A$ e $B$ são independentes se
+        $$P(A\cap B)=P(A)P(B).$$
+      </definition>
+      <theorem id="thm:independencia-complementos" num="1.3.9">
+        <title>Independência e complementos</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=52">Casella e Berger, p. 25</link></meta-item></meta>
+
+        Se $A$ e $B$ são independentes, também são independentes os pares
+        $A,B^c$; $A^c,B$; e $A^c,B^c$.
+      </theorem>
+      <proof of="thm:independencia-complementos">
+Pela fórmula da diferença e pela independência,
+$$P(A\cap B^c)=P(A)-P(A\cap B)
+=P(A)-P(A)P(B)=P(A)(1-P(B))=P(A)P(B^c).$$
+Trocando os papéis de $A$ e $B$, obtemos a independência de $A^c$ e $B$.
+Aplicando o primeiro resultado ao par $A^c,B$, obtemos a independência de $A^c$ e $B^c$.
+</proof>
+      <definition id="def:independencia-mutua" num="1.3.12">
+        <title>Independência mútua</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=53">Casella e Berger, p. 26</link></meta-item></meta>
+
+        Uma coleção de eventos é mutuamente independente se, para toda seleção
+        finita de eventos distintos $A_{i_1},\ldots,A_{i_k}$ da coleção,
+        $$P\left(\bigcap_{j=1}^{k}A_{i_j}\right)
+          =\prod_{j=1}^{k}P(A_{i_j}).$$
+      </definition>
+<box type="note"><title>Dois a dois não basta</title>
+Considere dois lançamentos independentes de uma moeda equilibrada e os eventos
+$A=$ “a primeira é cara”, $B=$ “a segunda é cara” e $C=$ “os resultados são iguais”.
+Cada evento tem probabilidade $1/2$, e cada interseção de dois tem probabilidade $1/4$.
+Entretanto,
+$$P(A\cap B\cap C)=\frac14\ne\frac18=P(A)P(B)P(C).$$
+Este exemplo próprio mostra por que a definição exige todas as seleções finitas.
+</box></section>
+
+<section id="variaveis-aleatorias" num="1.4"><title>Variáveis aleatórias</title>
+      <example id="ex:cinquenta-pessoas" numbered="false">
+        <title>Contar respostas “sim”</title>
+        Uma pessoa pergunta a 50 pessoas se concordam ou não com uma proposta.
+        Representamos cada resposta por $0$ ou $1$ e estamos interessados no
+        número total de respostas “sim”.
+        Seja $X$ esse número. O espaço amostral original contém todas as sequências
+        de 50 zeros e uns, enquanto
+        $$X(S)=\{0,1,\ldots,50\}.$$
+        Definindo $X$, obtemos um mapa do espaço amostral original para os números.
+      </example>
+      <definition id="def:variavel-aleatoria" num="1.4.1">
+<title>Variável aleatória</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=54">Casella e Berger, p. 27</link></meta-item></meta>
+
+Uma variável aleatória associa um número real a cada resultado do experimento:
+$$X:S\to\mathbb R.$$
+No tratamento formal, exige-se mensurabilidade, isto é,
+$\{s\in S:X(s)\le x\}\in\mathcal B$ para todo $x\in\mathbb R$.
+</definition>
+      <table id="tbl:variaveis">
+        <title>Exemplos de variáveis aleatórias</title>
+        <header><column>Experimento</column><column>Variável aleatória</column><column>Valores indicados</column></header>
+        <row><column>Jogar dois dados</column><column>$X=$ soma dos resultados</column><column>$\{2,3,\ldots,12\}$</column></row>
+        <row><column>Jogar uma moeda 25 vezes</column><column>$X=$ número de caras</column><column>$\{0,1,\ldots,25\}$</column></row>
+        <row><column>Medir a altura de uma pessoa aleatória</column><column>$X=$ altura em metros</column><column>Valores reais positivos</column></row>
+      </table>
+      O conjunto de valores de $X$ é sua imagem $X(S)$; ele pode ser bem mais simples
+      que o espaço amostral original. 
+
+      <example id="ex:tres-moedas" num="1.4.3">
+        <title>Três lançamentos de uma moeda</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=55">Casella e Berger, pp. 28–29</link></meta-item></meta>
+
+        $H$ representa cara e $T$ representa coroa. Seja $X$ o número de caras:
+        <table numbered="false">
+          <header><column>$s$</column><column>$HHH$</column><column>$HHT$</column><column>$HTH$</column><column>$THH$</column><column>$TTH$</column><column>$THT$</column><column>$HTT$</column><column>$TTT$</column></header>
+          <row><column>$X(s)$</column><column>$3$</column><column>$2$</column><column>$2$</column><column>$2$</column><column>$1$</column><column>$1$</column><column>$1$</column><column>$0$</column></row>
+        </table>
+        Para lançamentos independentes de uma moeda equilibrada,
+        $$P(X=2)=P(\{HHT,HTH,THH\})=\frac38.$$
+        A probabilidade induzida por $X$ pode ser escrita como
+        $$P_X(\{2\})=P(X=2).$$
+      </example>
+      <example id="ex:binomial" num="1.4.4">
+<title>Número de caras em $n$ lançamentos</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=56">Casella e Berger, p. 29</link></meta-item></meta>
+
+Considere $n$ lançamentos independentes, cada um com probabilidade $p$ de cara.
+Há $\binom nk$ sequências com exatamente $k$ caras, e cada uma tem
+probabilidade $p^k(1-p)^{n-k}$. Portanto,
+$$P(X=k)=\binom nk p^k(1-p)^{n-k},\qquad k=0,1,\ldots,n.$$
+Para $p=1/2$, todas as $2^n$ sequências são equiprováveis e a fórmula se reduz a
+$P(X=k)=\binom nk/2^n$. Esta última é a construção usada no exemplo do livro;
+o parâmetro $p$ geral é uma extensão das notas.
+</example></section>
+
+<section id="distribuicoes" num="1.5"><title>Funções de distribuição</title><subsection id="funcao-distribuicao">
+<title>Função de distribuição acumulada</title>
+      <definition id="def:cdf" num="1.5.1">
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=56">Casella e Berger, p. 29</link></meta-item></meta>
+
+        A função de distribuição acumulada de uma variável aleatória $X$,
+        denotada por $F_X$, é
+        $$F_X(x)=P(X\le x),\qquad x\in\mathbb R.$$
+      </definition>
+      <example id="ex:cdf-tres-moedas" num="1.5.2">
+        <title>Distribuição acumulada do número de caras em três lançamentos</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=57">Casella e Berger, p. 30</link></meta-item></meta>
+
+        Para o experimento de três lançamentos independentes de uma moeda equilibrada,
+        $$F_X(x)=\begin{cases}
+          0,&x<0,\\
+          \frac18,&0\le x<1,\\
+          \frac12,&1\le x<2,\\
+          \frac78,&2\le x<3,\\
+          1,&x\ge3.
+        \end{cases}$$
+        <figure src="figuras/cdf-tres-moedas.svg" num="1.5.1" alt="CDF vetorial do número de caras em três lançamentos de uma moeda equilibrada">
+          <caption>CDF com saltos em $0,1,2,3$. Pontos preenchidos pertencem ao gráfico; círculos abertos indicam extremos excluídos. Base: Exemplo 1.5.2 e Figura 1.5.1, p. 30.</caption>
+        </figure>
+      </example>
+      <theorem id="thm:caracterizacao-cdf" num="1.5.3">
+        <title>Caracterização de uma CDF</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=58">Casella e Berger, p. 31</link></meta-item></meta>
+
+        Uma função $F:\mathbb R\to\mathbb R$ é uma função de distribuição acumulada
+        se, e somente se, satisfaz:
+        <list marker="a">
+          <item>$\displaystyle\lim_{x\to-\infty}F(x)=0$ e
+            $\displaystyle\lim_{x\to\infty}F(x)=1$.</item>
+          <item>$F$ é não decrescente: se $x_0<x_1$, então $F(x_0)\le F(x_1)$.</item>
+          <item>$F$ é contínua pela direita:
+            $\displaystyle\lim_{x\downarrow x_0}F(x)=F(x_0)$ para todo $x_0$.</item>
+        </list>
+      </theorem>
+<proof of="thm:caracterizacao-cdf">
+<b>Necessidade.</b> Os eventos $\{X\le n\}$ crescem até $S$, e os eventos
+$\{X\le -n\}$ decrescem até o vazio. A continuidade das probabilidades nessas
+sequências fornece os limites $1$ e $0$.
+Se $x_0<x_1$, temos $\{X\le x_0\}\subseteq\{X\le x_1\}$, provando a monotonicidade.
+Se $x_n\downarrow x_0$, então $\{X\le x_n\}\downarrow\{X\le x_0\}$;
+a continuidade por cima dá $F(x_n)\to F(x_0)$.
+
+<b>Suficiência — construção.</b> Para $U$ uniforme em $(0,1)$, defina
+$$X=\inf\{t\in\mathbb R:F(t)\ge U\}.$$
+Os limites de $F$ garantem que esse ínfimo é finito. Pela monotonicidade e
+continuidade pela direita, $\{X\le x\}=\{U\le F(x)\}$; logo
+$$P(X\le x)=P(U\le F(x))=F(x).$$
+Essa construção explicita a direção que o livro apresenta apenas em esboço.
+</proof>
+</subsection>
+<subsection id="geometrica">
+<title>Distribuição geométrica — Exemplo 1.5.4</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=58">Casella e Berger, pp. 31–32</link></meta-item></meta>
+      Joga-se uma moeda até aparecer a primeira cara. Seja $p$ a probabilidade
+      de cara em cada lançamento e seja $X$ o número de lançamentos até a primeira cara.
+      Consideramos lançamentos independentes e $0<p\le1$.
+      O suporte é $\mathcal X=\{1,2,3,\ldots\}$ e
+      $$P(X=x)=(1-p)^{x-1}p,\qquad x=1,2,\ldots.$$
+Isso corresponde a $x-1$ coroas seguidas da primeira cara. Somando a progressão geométrica,
+para $m\in\mathbb N^+$,
+$$P(X\le m)=p\sum_{k=1}^{m}(1-p)^{k-1}=1-(1-p)^m.$$
+Para um argumento real, a CDF completa é
+$$F_X(x)=\begin{cases}
+0,&x<1,\\
+1-(1-p)^{\lfloor x\rfloor},&x\ge1.
+\end{cases}$$
+Usa-se $0<p\le1$; para $p=0$ a primeira cara nunca ocorre.
+
+      <subsubsection id="geometrica-propriedades">
+        <title>Verificação das propriedades da distribuição acumulada</title>
+        <b>Propriedade 1.</b> Como $X$ só assume inteiros positivos,
+        $$F_X(x)=P\bigl(X\in\mathbb N^+\cap(-\infty,x]\bigr)=0\quad\text{se }x<1.$$
+        Logo $\lim_{x\to-\infty}F_X(x)=0$. Por outro lado,
+        $$\lim_{x\to\infty}F_X(x)
+          =\sum_{k=1}^{\infty}(1-p)^{k-1}p
+          =p\sum_{k=0}^{\infty}(1-p)^k
+          =\frac{p}{1-(1-p)}=1.$$
+
+        <b>Propriedade 2.</b> Para $x_0<x_1$, a decomposição em eventos disjuntos dá
+        <equations numbered="false">
+          F_X(x_1)&=P(X\le x_1)\\
+                  &=P\bigl(X\in(-\infty,x_0]\cup(x_0,x_1]\bigr)\\
+                  &=F_X(x_0)+P(x_0<X\le x_1)\\
+                  &\ge F_X(x_0).
+        </equations>
+        
+<b>Propriedade 3.</b> Para cada $x$, existe $\delta>0$ tal que não há inteiro em
+$(x,x+\delta)$. Assim, $F_X(x+h)=F_X(x)$ para $0\le h<\delta$, e
+$\lim_{h\downarrow0}F_X(x+h)=F_X(x)$.
+
+      </subsubsection>
+      <figure src="figuras/cdf-geometrica.svg" num="1.5.2" alt="CDF vetorial da distribuição geométrica com p igual a 0,3">
+        <caption>Distribuição geométrica com $p=0{,}3$. Base: Exemplo 1.5.4, pp. 31–32, e Figura 1.5.2, p. 32.</caption>
+      </figure>
+</subsection>
+<subsection id="discretas-continuas">
+<title>Variáveis discretas e contínuas</title>
+      <definition id="def:discreta-continua" num="1.5.7">
+<title>Variáveis discretas e contínuas</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=60">Casella e Berger, p. 33</link></meta-item></meta>
+
+Na convenção apresentada nesta seção do livro, $X$ é contínua quando sua CDF é contínua;
+é discreta quando sua probabilidade está concentrada em um conjunto finito ou contável,
+e sua CDF é formada pelos saltos correspondentes.
+</definition>
+Ter CDF contínua não é, por si só, suficiente para garantir uma densidade.
+Nos modelos com densidade usados aqui, essa hipótese adicional será explicitada.
+Também podem existir distribuições com uma parte discreta e outra contínua.
+      <example id="ex:altura-precisao" numbered="false">
+        Se $X$ é a altura de pessoas e a medição é feita com precisão finita,
+        os valores registrados ficam em uma grade discreta, mesmo que a altura
+        seja modelada por uma variável contínua.
+      </example>
+      <figure src="figuras/alturas.svg" numbered="false" alt="Densidades e CDFs de dois modelos normais ilustrativos para alturas">
+        <caption>Modelos ilustrativos de alturas, com parâmetros escolhidos apenas para o desenho. Acima: densidades; abaixo: CDFs. A figura explica o exemplo das notas e não representa dados observados do livro.</caption>
+      </figure>
+      <definition id="def:identicamente-distribuidas" num="1.5.8">
+        <title>Variáveis identicamente distribuídas</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=60">Casella e Berger, p. 33</link></meta-item></meta>
+
+        $X$ e $Y$ são identicamente distribuídas se, para todo conjunto de Borel
+        $A\subseteq\mathbb R$,
+        $$P(X\in A)=P(Y\in A).$$
+      </definition>
+      <theorem id="thm:igualdade-distribuicoes" num="1.5.10">
+        <title>Equivalência pela CDF</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=61">Casella e Berger, p. 34</link></meta-item></meta>
+
+        As afirmações seguintes são equivalentes:
+        <list marker="a">
+          <item>$X$ e $Y$ são identicamente distribuídas.</item>
+          <item>$F_X(x)=F_Y(x)$ para todo $x\in\mathbb R$.</item>
+        </list>
+      </theorem>
+<proof of="thm:igualdade-distribuicoes">
+Se as distribuições são iguais, basta tomar $A=(-\infty,x]$ para concluir
+$F_X(x)=F_Y(x)$.
+Reciprocamente, CDFs iguais dão as mesmas probabilidades para todos os intervalos
+$(a,b]$, pois
+$$P(a<X\le b)=F_X(b)-F_X(a).$$
+Esses intervalos determinam de modo único uma medida de probabilidade nos conjuntos de Borel.
+Essa unicidade, que exige um argumento de teoria da medida, conclui a volta.
+</proof>
+      <exercise id="ex:igualdade-distribuicoes" numbered="false">
+Considere três lançamentos de uma moeda equilibrada e seja $X$ o número de caras e
+$Y$ o número de coroas. Verifique que $X$ e $Y$ têm a mesma distribuição,
+embora $X(s)$ e $Y(s)$ não sejam iguais para todos os resultados $s$.
+<em>Base: Exemplo 1.5.9, pp. 33–34.</em>
+</exercise>
+</subsection></section>
+
+<section id="massa-probabilidade" num="1.6"><title>Funções de massa e densidade</title>
+      Associada a $X$ e $F_X$, temos, no caso discreto, a função de massa de probabilidade.
+      <definition id="def:pmf" num="1.6.1">
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=61">Casella e Berger, p. 34</link></meta-item></meta>
+
+        A função de massa de probabilidade, ou PMF, de uma variável aleatória
+        discreta $X$ é
+        $$f_X(x)=P(X=x).$$
+      </definition>
+A massa em um ponto é o tamanho do salto da CDF:
+$$P(X=x)=F_X(x)-F_X(x^-),\qquad
+F_X(x^-)=\lim_{t\uparrow x}F_X(t).$$
+Consequentemente, se $F_X$ é contínua em $x$, então $P(X=x)=0$.
+<em>Casella e Berger, pp. 34–35.</em>
+      <example id="ex:pmf-geometrica" num="1.6.2">
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=61">Casella e Berger, p. 34</link></meta-item></meta>
+
+        No experimento de jogar a moeda até sair cara,
+        $$f_X(x)=\begin{cases}
+          (1-p)^{x-1}p,&x=1,2,\ldots,\\
+          0,&\text{caso contrário}.
+        \end{cases}$$
+      </example>
+      <theorem id="thm:caracterizacao-pmf" num="1.6.5">
+        <title>Caracterização de uma PMF</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=63">Casella e Berger, pp. 36–37</link></meta-item></meta>
+
+        Para um suporte finito ou contável $\mathcal X$, uma função $f_X$ é uma
+        função de massa de probabilidade se, e somente se,
+        <list marker="a">
+          <item>$f_X(x)\ge0$ para todo $x\in\mathcal X$.</item>
+          <item>$\displaystyle\sum_{x\in\mathcal X}f_X(x)=1$.</item>
+        </list>
+        Fora de $\mathcal X$, toma-se $f_X(x)=0$.
+      </theorem>
+      <proof of="thm:caracterizacao-pmf">
+Se $f_X(x)=P(X=x)$, a não negatividade é imediata, e a aditividade contável fornece
+$$\sum_{x\in\mathcal X}f_X(x)=P(X\in\mathcal X)=1.$$
+Reciprocamente, tome $S=\mathcal X$, atribua massa $f_X(x)$ ao resultado $x$ e
+defina $X(s)=s$. Para $A\subseteq\mathcal X$, a fórmula
+$$P(A)=\sum_{x\in A}f_X(x)$$
+define uma probabilidade. Por construção, $P(X=x)=f_X(x)$, e sua CDF é
+$$F_X(t)=\sum_{x\le t}f_X(x).$$
+</proof>
+<definition id="def:densidade" num="1.6.3">
+<title>Densidade de probabilidade</title>
+<meta><meta-item key="Livro"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=62">Casella e Berger, p. 35</link></meta-item></meta>
+Uma densidade $f_X$ é uma função não negativa que representa a CDF pela integral
+$$F_X(x)=\int_{-\infty}^x f_X(t)\,dt.$$
+Quando existe essa representação, probabilidades de intervalos são áreas:
+$$P(a<X\le b)=F_X(b)-F_X(a)=\int_a^b f_X(t)\,dt.$$
+Se $F_X$ é diferenciável com derivada contínua, $f_X=F_X'$ fornece essa densidade.
+</definition>
+<box type="note"><title>Massa e densidade são objetos diferentes</title>
+No caso discreto, $f_X(x)=P(X=x)$ é uma probabilidade pontual.
+No caso com densidade, $P(X=x)=0$ para cada ponto: as probabilidades são obtidas por integração.
+A versão contínua do Teorema 1.6.5 exige $f_X\ge0$ e
+$\int_{-\infty}^{\infty}f_X(x)\,dx=1$ (pp. 36–37).
+</box>
+</section>
+
+<section id="valor-esperado" numbered="false"><title>Esperança e variância — complemento das notas</title>
+      Para uma variável aleatória discreta $X$ e uma função $g$,
+      $$\mathbb E[g(X)]=\sum_{x\in\mathcal X}g(x)f_X(x),$$
+      quando a esperança estiver definida; a convergência absoluta da soma garante
+      uma esperança finita.
+      <example id="ex:media-variancia" numbered="false">
+        <title>Média e variância</title>
+        A média de $X$ é $\mathbb E[X]$. A variância é
+        $$\operatorname{Var}(X)=\mathbb E\bigl[(X-\mathbb E[X])^2\bigr],$$
+        quando essas expressões estiverem definidas.
+      </example>
+      <example id="ex:esperanca-binomial" numbered="false">
+        <title>Esperança de uma variável binomial</title>
+        Seja $X\sim\operatorname{Bin}(n,p)$. Usando
+        $x\binom nx=n\binom{n-1}{x-1}$ para $x\ge1$,
+        <equations numbered="false">
+          \mathbb E[X]
+          &=\sum_{x=0}^{n}x\binom nx p^x(1-p)^{n-x}\\
+          &=\sum_{x=1}^{n}x\binom nx p^x(1-p)^{n-x}\\
+          &=n\sum_{x=1}^{n}\binom{n-1}{x-1}p^x(1-p)^{n-x}.
+        </equations>
+        Faça $y=x-1$, de modo que $x=y+1$. Então
+        <equations numbered="false">
+          \mathbb E[X]
+          &=n\sum_{y=0}^{n-1}\binom{n-1}{y}p^{y+1}(1-p)^{n-1-y}\\
+          &=np\sum_{y=0}^{n-1}\binom{n-1}{y}p^y(1-p)^{n-1-y}\\
+          &=np.
+        </equations>
+        A última soma é igual a 1, pois soma as massas de uma
+        distribuição $\operatorname{Bin}(n-1,p)$.
+      </example></section>
+
+</chapter>
+</document>

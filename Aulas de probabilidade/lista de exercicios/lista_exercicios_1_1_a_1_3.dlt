@@ -1,0 +1,232 @@
+<document lang="pt-BR" type="article" theme-accent="blue">
+  <title>Projeto Axioma: Lista de Probabilidade</title>
+  <meta>
+    <meta-item key="Conteúdo">Seções 1.1 a 1.3</meta-item>
+    <meta-item key="Ênfase">Probabilidade condicional e independência</meta-item>
+    <meta-item key="Referência"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf">Casella e Berger, Statistical Inference, 2ª edição</link></meta-item>
+  </meta>
+  <intro>
+    Dez exercícios de conjuntos, fundamentos de probabilidade, contagem,
+    probabilidade condicional, regra de Bayes e independência.
+  </intro>
+  Justifique suas respostas e explicite as hipóteses utilizadas. Nas demonstrações,
+  indique os axiomas, as identidades de conjuntos e os resultados que fundamentam cada passo.
+  As questões são próprias ou adaptações para esta lista: sua numeração não é a dos
+  exercícios do livro. As referências indicam a base de cada questão e usam as páginas impressas.
+  O asterisco indica uma questão de maior dificuldade.
+
+  <section id="consulta" numbered="false">
+    <title>Definições para consulta</title>
+    <box type="note">
+      <title>Espaço amostral, eventos e sigma-álgebra</title>
+      O espaço amostral $S$ reúne os resultados possíveis do experimento.
+      Uma $\sigma$-álgebra $\mathcal B$ contém $S$ e é fechada por complementos
+      e uniões contáveis. Os eventos mensuráveis são os elementos de $\mathcal B$.
+      Todos os complementos são tomados em relação a $S$.
+      <em>Definições 1.1.1, 1.1.2 e 1.2.1, pp. 1–2 e 6.</em>
+    </box>
+    <box type="note">
+      <title>Axiomas de probabilidade</title>
+      Uma função $P:\mathcal B\to\mathbb R$ é uma probabilidade quando
+      $P(A)\ge0$ para todo $A\in\mathcal B$, $P(S)=1$ e, para eventos
+      $A_1,A_2,\ldots$ dois a dois disjuntos,
+      $$P\left(\bigcup_{i=1}^{\infty}A_i\right)=\sum_{i=1}^{\infty}P(A_i).$$
+      Podem ser usados, sem nova demonstração, os resultados
+      $P(\varnothing)=0$, $P(A^c)=1-P(A)$ e $0\le P(A)\le1$.
+      <em>Definição 1.2.4, p. 7; Teorema 1.2.8, p. 10.</em>
+    </box>
+    <box type="note">
+      <title>Condicionamento e independência</title>
+      Para $P(B)>0$, define-se
+      $$P(A\mid B)=\frac{P(A\cap B)}{P(B)}.$$
+      Os eventos $A$ e $B$ são independentes quando $P(A\cap B)=P(A)P(B)$.
+      <em>Definição 1.3.2, p. 20; Definição 1.3.7, p. 24.</em>
+    </box>
+  </section>
+
+  <section id="questoes" numbered="false">
+    <title>Questões</title>
+
+    <exercise id="q1" num="1">
+<title>A sigma-álgebra gerada por uma partição</title>
+<meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=30">Seções 1.1 e 1.2.1; Teorema 1.1.4 e Definições 1.1.6 e 1.2.1, pp. 3–6</link></meta-item></meta>
+Sejam $C_1,C_2,C_3$ conjuntos não vazios que formam uma partição de $S$.
+Considere a coleção
+$$\mathcal B=\left\{\bigcup_{i\in I}C_i:I\subseteq\{1,2,3\}\right\},$$
+adotando a união vazia como $\varnothing$.
+<list marker="a">
+  <item>Escreva os elementos de $\mathcal B$. Para cada $I\subseteq\{1,2,3\}$,
+    expresse o complemento de $\bigcup_{i\in I}C_i$ como união das partes da partição.
+    Justifique a igualdade usando a pertinência de um elemento qualquer.</item>
+  <item>Usando a descrição do item anterior, prove que $\mathcal B$ é uma
+    $\sigma$-álgebra. Justifique também o fechamento por uniões contáveis,
+    mesmo que a coleção de conjuntos envolvidos contenha repetições.</item>
+  <item>Prove que $\mathcal B$ é a menor $\sigma$-álgebra que contém
+    $C_1,C_2,C_3$. Isto é, além de ser uma $\sigma$-álgebra, ela deve estar
+    contida em qualquer outra que contenha essas três partes. Caracterize então
+    os conjuntos $E\subseteq S$ que pertencem a $\mathcal B$ pela condição
+    $E\cap C_i\in\{\varnothing,C_i\}$ para todo $i$, e explique por que
+    nenhum evento de $\mathcal B$ distingue dois pontos de uma mesma parte.</item>
+</list>
+</exercise>
+
+    <exercise id="q2" num="2">
+<title>* Da aditividade à desigualdade de Bonferroni</title>
+<meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=37">Teoremas 1.2.9 e 1.2.11 e desigualdade de Bonferroni, pp. 10–13</link></meta-item></meta>
+Seja $P$ uma função de probabilidade. O objetivo é provar que, para eventos
+$A_1,\ldots,A_m$,
+$$P\left(\bigcap_{i=1}^{m}A_i\right)\ge\sum_{i=1}^{m}P(A_i)-(m-1).$$
+<list marker="a">
+  <item>Usando uma decomposição em eventos disjuntos, prove que
+    $P(F\setminus E)=P(F)-P(E)$ quando $E\subseteq F$.
+    Conclua que $P(E)\le P(F)$.</item>
+  <item>Para uma sequência de eventos $E_1,E_2,\ldots$, defina
+    $$D_1=E_1,\qquad D_n=E_n\setminus\bigcup_{j=1}^{n-1}E_j\quad(n\ge2).$$
+    Prove que os $D_n$ são dois a dois disjuntos, que $D_n\subseteq E_n$
+    e que $\bigcup_nD_n=\bigcup_nE_n$.</item>
+  <item>Aplique a aditividade contável aos $D_n$ e a monotonicidade do item (a)
+    para demonstrar a desigualdade de Boole:
+    $$P\left(\bigcup_{n=1}^{\infty}E_n\right)\le\sum_{n=1}^{\infty}P(E_n).$$
+    Use-a com os complementos dos $A_i$ e as leis de De Morgan para concluir
+    a desigualdade enunciada no início da questão.</item>
+</list>
+</exercise>
+
+    <exercise id="q3" num="3">
+<title>Contar seleções sem perder a informação da ordem</title>
+<meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=40">Teorema 1.2.14, Tabela 1.2.1 e seções 1.2.3–1.2.4, pp. 13–17</link></meta-item></meta>
+Considere $n$ objetos distintos e uma seleção de tamanho $r$, com $2\le r\le n$.
+<list marker="a">
+  <item>Quando a ordem é relevante, deduza o número de sequências possíveis
+    sem reposição e com reposição, usando o princípio multiplicativo.</item>
+  <item>No caso sem reposição, quantas sequências do item (a) representam
+    um mesmo grupo não ordenado? Use essa resposta para deduzir o número de grupos.
+    Se as sequências são equiprováveis, esses grupos também são? Justifique.</item>
+  <item>No caso com reposição, represente um grupo não ordenado pelas multiplicidades
+    $(k_1,\ldots,k_n)$, com $k_i\ge0$ e $\sum_i k_i=r$.
+    Deduza o número desses grupos usando uma representação por marcas e separadores.
+    Depois, mostre por que o argumento de equiprobabilidade do item (b) não se estende
+    a esse caso, comparando um grupo com $r$ objetos iguais e outro com $r$ objetos distintos.</item>
+</list>
+</exercise>
+
+    <exercise id="q4" num="4">
+<title>O condicionamento define uma nova probabilidade</title>
+<meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=47">Definição 1.3.2 e discussão da probabilidade condicional, pp. 20–21</link></meta-item></meta>
+Fixe $B\in\mathcal B$ com $P(B)>0$ e defina
+$$P_B(A)=\frac{P(A\cap B)}{P(B)},\qquad A\in\mathcal B.$$
+Prove que $P_B$ é uma função de probabilidade sobre $(S,\mathcal B)$,
+verificando os três axiomas de Kolmogorov. Na aditividade contável,
+justifique as operações de conjuntos utilizadas.
+</exercise>
+
+    <exercise id="q5" num="5">
+<title>Qual informação torna quatro ases mais prováveis?</title>
+<meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=47">Exemplos 1.3.1 e 1.3.3, pp. 20–21</link></meta-item></meta>
+Quatro cartas são retiradas, em ordem e sem reposição, de um baralho comum
+bem embaralhado, com 52 cartas e quatro ases. Considere os eventos
+$A=$ “as quatro cartas são ases”, $B=$ “a primeira carta é um ás” e
+$C=$ “há pelo menos um ás entre as quatro cartas”.
+<list marker="a">
+  <item>Calcule $P(A)$, $P(B)$ e $P(C)$ e determine as relações de inclusão
+    entre esses três eventos.</item>
+  <item>Use as inclusões e os valores do item (a) para comparar $P(A\mid B)$
+    e $P(A\mid C)$. Qual informação torna quatro ases mais prováveis?
+    Justifique quantitativamente e explique por que as informações são diferentes.</item>
+</list>
+</exercise>
+
+    <exercise id="q6" num="6">
+<title>Demonstração do teorema de Bayes</title>
+<meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=50">Teorema 1.3.5, p. 23; Teorema 1.2.11(a), pp. 11–12</link></meta-item></meta>
+Seja $\{A_i:i\in I\}$ uma partição mensurável finita ou contável de $S$,
+com $P(A_i)>0$ para todo $i\in I$. Seja $B\in\mathcal B$ com $P(B)>0$.
+O objetivo é demonstrar o <b>Teorema 1.3.5 do livro</b>.
+<list marker="a">
+  <item>Escreva $B$ como uma união dos eventos $B\cap A_i$ e prove que
+    essa união é disjunta.</item>
+  <item>Aplicando os axiomas à decomposição do item (a) e usando a definição
+    de probabilidade condicional, prove, sem usar Bayes, que
+    $$P(B)=\sum_{j\in I}P(B\mid A_j)P(A_j).$$</item>
+  <item>Partindo da definição de $P(A_i\mid B)$ e substituindo o denominador
+    pelo resultado do item (b), demonstre que
+    $$P(A_i\mid B)=
+    \frac{P(B\mid A_i)P(A_i)}
+    {\displaystyle\sum_{j\in I}P(B\mid A_j)P(A_j)}.$$
+    Justifique por que todas as probabilidades condicionais estão definidas
+    e por que o denominador é positivo.</item>
+</list>
+</exercise>
+
+    <exercise id="q7" num="7">
+<title>De qual máquina veio a peça que gerou alerta?</title>
+<meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=50">Aplicação própria da probabilidade total e do Teorema 1.3.5; Exemplo 1.3.6, p. 23</link></meta-item></meta>
+Três máquinas produzem peças que são misturadas em um depósito.
+Uma peça é escolhida ao acaso, segundo o modelo:
+<table numbered="false">
+  <header><column>Máquina</column><column>Fração da produção</column><column>Probabilidade de defeito</column></header>
+  <row><column>$M_1$</column><column>$1/2$</column><column>$1/100$</column></row>
+  <row><column>$M_2$</column><column>$3/10$</column><column>$3/100$</column></row>
+  <row><column>$M_3$</column><column>$1/5$</column><column>$1/20$</column></row>
+</table>
+Seja $D$ o evento de defeito e seja $T$ o evento de um teste emitir um alerta.
+Para cada máquina $i$, suponha
+$$P(T\mid D\cap M_i)=\frac9{10},\qquad
+P(T\mid D^c\cap M_i)=\frac1{20}.$$
+<list marker="a">
+  <item>Dentro de cada máquina, separe os casos “peça defeituosa” e
+    “peça não defeituosa” para calcular $P(T\mid M_i)$, para $i=1,2,3$.</item>
+  <item>Use a partição por origem e o item (a) para calcular $P(T)$.</item>
+  <item>Uma peça gerou alerta. Use os itens anteriores e Bayes para determinar
+    sua origem mais provável. Compare a conclusão com a máquina que tem a maior
+    taxa de defeito e explique o papel da fração da produção nessa diferença.</item>
+</list>
+</exercise>
+
+    <exercise id="q8" num="8">
+<title>Independência e complementos</title>
+<meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=51">Definição 1.3.7 e Teorema 1.3.9, pp. 24–25</link></meta-item></meta>
+Sejam $A$ e $B$ eventos independentes. Prove que os pares $A,B^c$;
+$A^c,B$; e $A^c,B^c$ também são independentes.
+Seu argumento deve valer inclusive quando algum dos eventos tem probabilidade zero.
+</exercise>
+
+    <exercise id="q9" num="9">
+<title>* Quando a informação cria dependência</title>
+<meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=52">Discussão dos Exemplos 1.3.10 e 1.3.11 e Definição 1.3.12, pp. 25–26</link></meta-item></meta>
+Duas moedas equilibradas são lançadas independentemente. Use
+$S=\{HH,HT,TH,TT\}$, com $H=$ cara e $T=$ coroa, e defina
+$$A=\{HH,HT\},\qquad B=\{HH,TH\},\qquad C=\{HH,TT\}.$$
+<list marker="a">
+  <item>Calcule as probabilidades dos três eventos e das três interseções
+    de pares. Mostre que $A,B,C$ são independentes dois a dois.</item>
+  <item>Calcule $P(A\cap B\cap C)$ e use o item (a) para decidir se
+    a independência dois a dois obtida é também independência mútua.</item>
+  <item>Agora se sabe que ocorreu $C$. Usando a probabilidade condicionada
+    $P_C$ da questão 4, calcule $P_C(A)$, $P_C(B)$ e $P_C(A\cap B)$.
+    Decida se $A$ e $B$ continuam independentes sob $P_C$ e explique
+    o que a informação de $C$ permite concluir sobre o resultado da segunda moeda
+    quando o resultado da primeira é conhecido.</item>
+</list>
+</exercise>
+
+    <exercise id="q10" num="10">
+<title>* Três prisioneiros: o mecanismo da informação</title>
+<meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=48">Adaptação do Exemplo 1.3.4, pp. 21–22, com aplicação do Teorema 1.3.5, p. 23</link></meta-item></meta>
+Entre três prisioneiros, exatamente um receberá um indulto, escolhido ao acaso.
+Sejam $A,B,C$ os eventos de o primeiro, o segundo ou o terceiro prisioneiro,
+respectivamente, receber o indulto.
+O primeiro pede ao guarda que diga o nome de um dos outros dois que será executado.
+O guarda conhece o resultado e sempre diz a verdade. Se ocorreu $A$, ele anuncia
+o segundo nome com probabilidade $q$ e o terceiro com probabilidade $1-q$,
+onde $q\in[0,1]$. Se ocorreu $B$, anuncia necessariamente o terceiro;
+se ocorreu $C$, anuncia necessariamente o segundo.
+
+O guarda anunciou o segundo nome. <b>Para quais valores de $q$ essa mensagem
+aumenta, mantém ou diminui a probabilidade de indulto do primeiro prisioneiro?</b>
+Justifique sua resposta construindo o evento correspondente à mensagem e
+aplicando Bayes. Na conclusão, explique por que ouvir essa mensagem não equivale,
+em geral, a apenas saber que o segundo prisioneiro não recebeu o indulto.
+</exercise>
+  </section>
+</document>

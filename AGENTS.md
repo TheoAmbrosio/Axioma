@@ -1,6 +1,6 @@
 # Orientações para a IA
 
-Este é o Axioma, repositório pessoal de estudos. As aulas de probabilidade ficam em `Aulas de probabilidade/`.
+Este é o Axioma, repositório pessoal das minhas aulas de probabilidade. As aulas de probabilidade ficam em `Aulas de probabilidade/`.
 
 ## Trabalhar com Delta
 

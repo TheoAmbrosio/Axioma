@@ -1,0 +1,222 @@
+<document lang="pt-BR" type="article" theme-accent="blue">
+  <title>Projeto Axioma: Lista de Probabilidade</title>
+  <meta>
+    <meta-item key="Conteúdo">Seções 1.4 a 1.6; esperança e variância</meta-item>
+    <meta-item key="Referência"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf">Casella e Berger, Statistical Inference, 2ª edição</link></meta-item>
+  </meta>
+  <intro>
+    Quinze exercícios para praticar variáveis aleatórias, distribuições acumuladas,
+    funções de massa e densidade, esperança e variância.
+  </intro>
+  Justifique os cálculos e explicite as hipóteses utilizadas.
+  As questões 2, 6, 7, 8 e 10 são adaptações de exercícios identificados do livro,
+  com redação própria, números ajustados quando conveniente e itens adicionais.
+  As outras questões são próprias e mais simples.
+  A numeração abaixo é da lista; a referência de cada adaptação indica o número no livro.
+  Para esperança e variância, use apenas as somas discretas apresentadas nas notas.
+  As questões 6 e 8 envolvem integrais e são opcionais, para quem quiser se divertir.
+  Você pode pulá-las sem prejudicar o treino com variáveis discretas.
+
+  <section id="questoes" numbered="false">
+    <title>Questões</title>
+
+    <exercise id="q1" num="1">
+      <title>Uma variável aleatória em um dado</title>
+      <meta><meta-item key="Base">Questão própria; seção 1.4 das notas</meta-item></meta>
+      Lance um dado equilibrado, com $S=\{1,2,3,4,5,6\}$, e defina
+      $X(s)=1$ se $s$ for par e $X(s)=0$ se $s$ for ímpar.
+      <list marker="a">
+        <item>Determine $X(S)$ e os eventos $\{s\in S:X(s)=0\}$ e
+          $\{s\in S:X(s)=1\}$.</item>
+        <item>Calcule a função de massa $f_X$. Para qualquer $x\in\mathbb R$,
+          explique por que $\{s\in S:X(s)\le x\}$ é um evento quando
+          consideramos todos os subconjuntos de $S$.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q2" num="2">
+      <title>Acertos ao responder ao acaso</title>
+      <meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=70">Adaptação do exercício 1.44, p. 43</link></meta-item></meta>
+      Uma prova tem oito questões, cada uma com quatro alternativas
+      e exatamente uma correta. Uma pessoa escolhe cada resposta ao acaso,
+      independentemente das demais. Seja $X$ o número de acertos.
+      <list marker="a">
+        <item>Escreva $P(X=k)$ para cada $k=0,1,\ldots,8$.</item>
+        <item>Calcule $P(X=2)$ e $P(X\ge1)$. Para a segunda probabilidade,
+          considere o evento complementar.</item>
+        <item>Use a fórmula da esperança binomial demonstrada nas notas
+          para calcular $\mathbb E[X]$.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q3" num="3">
+      <title>Da massa à função de distribuição</title>
+      <meta><meta-item key="Base">Questão própria; seções 1.5 e 1.6 das notas</meta-item></meta>
+      Uma variável aleatória $X$ assume apenas os valores $-1$, $0$ e $2$, com
+      $$P(X=-1)=\frac14,\qquad P(X=0)=\frac12,\qquad P(X=2)=\frac14.$$
+      <list marker="a">
+        <item>Escreva $F_X(x)=P(X\le x)$ para todo $x\in\mathbb R$, separando
+          os intervalos em que a expressão muda.</item>
+        <item>Calcule $P(-1<X\le2)$ a partir de $F_X$ e recupere $P(X=0)$
+          pelo salto de $F_X$ em zero.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q4" num="4">
+      <title>Esperar a primeira cara</title>
+      <meta><meta-item key="Base">Questão própria; exemplo geométrico da seção 1.5 das notas</meta-item></meta>
+      Uma moeda tem probabilidade $1/3$ de sair cara em cada lançamento.
+      Os lançamentos são independentes e $X$ é o número de lançamentos até
+      a primeira cara.
+      <list marker="a">
+        <item>Escreva a função de massa de $X$ e calcule $P(X=3)$.</item>
+        <item>Calcule $P(X>3)$ e $F_X(2{,}5)$.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q5" num="5">
+      <title>Mesma distribuição, valores diferentes</title>
+      <meta><meta-item key="Base">Questão própria; seção 1.5 das notas</meta-item></meta>
+      Lance um dado equilibrado. Defina $U(s)=1$ se $s\in\{1,2,3\}$ e
+      $U(s)=0$ caso contrário. Defina $V(s)=1$ se $s$ for par e $V(s)=0$
+      caso contrário.
+      <list marker="a">
+        <item>Determine as funções de distribuição $F_U$ e $F_V$.</item>
+        <item>Decida se $U$ e $V$ têm a mesma distribuição. Encontre um
+          resultado $s$ em que $U(s)\ne V(s)$.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q6" num="6">
+      <title>Uma função de distribuição contínua (opcional: integrais)</title>
+      <meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=70">Adaptação do exercício 1.47(d), p. 43</link></meta-item></meta>
+      Considere a função
+      $$F(x)=\begin{cases}0,&x<0,\\1-e^{-x},&x\ge0.\end{cases}$$
+      <list marker="a">
+        <item>Verifique as três propriedades que caracterizam uma função de
+          distribuição acumulada.</item>
+        <item>Indique uma densidade $f$ cuja integral até $x$ seja $F(x)$.
+          Calcule $P(0<X\le\log 2)$ para uma variável $X$ com essa CDF.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q7" num="7">
+      <title>Amostra de aparelhos sem reposição</title>
+      <meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=71">Adaptação do exercício 1.51, p. 44</link></meta-item></meta>
+      Um lote contém oito aparelhos, dos quais dois são defeituosos.
+      Escolhem-se dois aparelhos sem reposição, sendo todos os pares igualmente
+      prováveis. Seja $X$ o número de defeituosos escolhidos.
+      <list marker="a">
+        <item>Conte os pares que resultam em $X=0$, $X=1$ e $X=2$ e obtenha
+          a função de massa de $X$.</item>
+        <item>Escreva $F_X(x)$ para todo $x\in\mathbb R$ e calcule
+          $P(X\ge1)$ de duas maneiras.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q8" num="8">
+      <title>Normalizar uma densidade (opcional: integrais)</title>
+      <meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=71">Adaptação do exercício 1.54(a), p. 44</link></meta-item></meta>
+      Seja $f(x)=c\sin x$ para $0<x<\pi/2$ e $f(x)=0$ fora desse intervalo.
+      <list marker="a">
+        <item>Determine $c$ para que $f$ seja uma densidade de probabilidade.</item>
+        <item>Para uma variável $X$ com essa densidade, calcule
+          $P(0<X<\pi/6)$ e $P(X=\pi/6)$. Explique a diferença entre os
+          dois resultados.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q9" num="9">
+      <title>Esperança de uma função e variância</title>
+      <meta><meta-item key="Base">Questão própria; complemento de esperança e variância das notas</meta-item></meta>
+      A variável aleatória $X$ tem a seguinte função de massa:
+      <table numbered="false">
+        <header><column>$x$</column><column>$0$</column><column>$1$</column><column>$3$</column></header>
+        <row><column>$f_X(x)$</column><column>$1/2$</column><column>$1/4$</column><column>$1/4$</column></row>
+      </table>
+      <list marker="a">
+        <item>Calcule $\mathbb E[X]$ e $\mathbb E[g(X)]$ para $g(x)=x^2$.</item>
+        <item>Calcule $\operatorname{Var}(X)$ diretamente pela definição
+          $\mathbb E[(X-\mathbb E[X])^2]$.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q10" num="10">
+      <title>Média e variância de uma uniforme discreta</title>
+      <meta><meta-item key="Base"><link to="https://pages.stat.wisc.edu/~shao/stat610/Casella_Berger_Statistical_Inference.pdf#page=106">Adaptação do exercício 2.24(b), p. 79</link></meta-item></meta>
+      Seja $X$ uniforme no conjunto $\{1,2,3,4\}$: cada valor tem
+      probabilidade $1/4$.
+      <list marker="a">
+        <item>Calcule $\mathbb E[X]$ pela soma que define a esperança discreta.</item>
+        <item>Calcule $\operatorname{Var}(X)$ diretamente pela definição,
+          indicando os quatro termos da soma.</item>
+      </list>
+    </exercise>
+  </section>
+
+  <section id="treino-discreto" numbered="false">
+    <title>Mais exercícios fáceis com variáveis discretas</title>
+
+    <exercise id="q11" num="11">
+      <title>Duas moedas</title>
+      <meta><meta-item key="Base">Questão própria; seções 1.4 a 1.6 das notas</meta-item></meta>
+      Duas moedas equilibradas são lançadas independentemente. Seja $X$ o número
+      de caras, com $H=$ cara e $T=$ coroa.
+      <list marker="a">
+        <item>Liste os quatro resultados possíveis e indique o valor de $X$
+          em cada um.</item>
+        <item>Escreva a função de massa de $X$ e calcule $F_X(1)$.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q12" num="12">
+      <title>Encontrar a constante de uma função de massa</title>
+      <meta><meta-item key="Base">Questão própria; seção 1.6 das notas</meta-item></meta>
+      Uma variável $X$ assume somente os valores $0$, $1$ e $2$, com
+      $$P(X=0)=c,\qquad P(X=1)=2c,\qquad P(X=2)=c.$$
+      <list marker="a">
+        <item>Determine $c$ para que essas probabilidades somem $1$.</item>
+        <item>Calcule $P(X\ge1)$ e $F_X(1/2)$.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q13" num="13">
+      <title>Uma função do resultado do dado</title>
+      <meta><meta-item key="Base">Questão própria; seções 1.4 e 1.6 das notas</meta-item></meta>
+      Lance um dado equilibrado e defina $Y(s)=\min\{s,3\}$, para
+      $s\in\{1,2,3,4,5,6\}$.
+      <list marker="a">
+        <item>Determine os valores possíveis de $Y$ e a probabilidade de
+          cada um.</item>
+        <item>Calcule $\mathbb E[Y]$ usando a função de massa obtida.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q14" num="14">
+      <title>O valor no ponto do salto</title>
+      <meta><meta-item key="Base">Questão própria; seções 1.5 e 1.6 das notas</meta-item></meta>
+      Considere as duas funções abaixo:
+      $$F(x)=\begin{cases}0,&x<0,\\\frac12,&0\le x<1,\\1,&x\ge1,\end{cases}
+      \qquad
+      G(x)=\begin{cases}0,&x\le0,\\\frac12,&0<x<1,\\1,&x\ge1.\end{cases}$$
+      <list marker="a">
+        <item>Qual delas pode ser uma função de distribuição acumulada?
+          Explique o que ocorre à direita do ponto $0$.</item>
+        <item>Para a função válida, determine as probabilidades nos pontos
+          $0$ e $1$.</item>
+      </list>
+    </exercise>
+
+    <exercise id="q15" num="15">
+      <title>Média e variância em três valores</title>
+      <meta><meta-item key="Base">Questão própria; complemento de esperança e variância das notas</meta-item></meta>
+      Seja $X$ uma variável com
+      $$P(X=-1)=\frac14,\qquad P(X=0)=\frac12,\qquad P(X=1)=\frac14.$$
+      <list marker="a">
+        <item>Calcule $\mathbb E[X]$.</item>
+        <item>Calcule $\operatorname{Var}(X)$ diretamente pela definição,
+          usando a média encontrada no item anterior.</item>
+      </list>
+    </exercise>
+  </section>
+</document>
